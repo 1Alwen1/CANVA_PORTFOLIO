@@ -607,19 +607,24 @@
   50% { opacity: 1; transform: scale(1.1); }
 }
 
+/* New animation – only vertical movement, no scaling */
+@keyframes floatNoScale {
+  0% { transform: translateY(0); opacity: 0.8; }
+  100% { transform: translateY(-20px); opacity: 1; }
+}
+
 /* make sure image sits above the frame's pseudo-elements */
 .profile-img {
   position: relative;
   z-index: 4;
   width: 250px;
   height: 250px;
-  object-fit: fill;
+  object-fit: fill;         
   border-radius: 50%;
   border: 3px solid var(--neon-cyan);
   box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px var(--neon-purple);
-  animation: float 6s infinite alternate;
+  animation: floatNoScale 6s infinite alternate;  
 }
-
 /* responsive adjustments */
 @media (max-width: 900px) {
   .profile-img {
