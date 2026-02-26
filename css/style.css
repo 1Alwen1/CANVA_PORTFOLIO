@@ -552,4 +552,97 @@
     width: 200px;
     height: 200px;
   }
+}/* ===== TECH FRAME FOR PROFILE PICTURE ===== */
+.frame-container {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 8px; /* space for the outer ring */
+}
+
+.frame-container::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 2px dashed var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--neon-cyan), inset 0 0 15px var(--neon-purple);
+  animation: rotateFrame 12s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes rotateFrame {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* glowing dots at cardinal points */
+.frame-container::after {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: -16px;
+  right: -16px;
+  bottom: -16px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 50% 0%, var(--neon-cyan) 4px, transparent 4px),
+    radial-gradient(circle at 100% 50%, var(--neon-purple) 4px, transparent 4px),
+    radial-gradient(circle at 50% 100%, var(--neon-cyan) 4px, transparent 4px),
+    radial-gradient(circle at 0% 50%, var(--neon-purple) 4px, transparent 4px);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  filter: drop-shadow(0 0 8px currentColor);
+  animation: pulseDots 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes pulseDots {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* make sure image sits above the frame's pseudo-elements */
+.profile-img {
+  position: relative;
+  z-index: 4;
+  width: 250px;
+  height: 250px;
+  object-fit: fill;
+  border-radius: 50%;
+  border: 3px solid var(--neon-cyan);
+  box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px var(--neon-purple);
+  animation: float 6s infinite alternate;
+}
+
+/* responsive adjustments */
+@media (max-width: 900px) {
+  .profile-img {
+    width: 250px;
+    height: 250px;
+  }
+  .frame-container::before {
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+  }
+  .frame-container::after {
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-img {
+    width: 200px;
+    height: 200px;
+  }
 }
